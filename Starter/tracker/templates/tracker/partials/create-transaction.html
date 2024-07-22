@@ -1,0 +1,28 @@
+{% load widget_tweaks %}
+
+<div id="create-transaction">
+    <h1 class="mt-4 mb-4 prose prose-2x1 text-white" >
+        Crear Transacción
+    </h1>
+
+    <form hx-post="{% url 'create-transaction' %}"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        hx-target="#create-transaction"
+        >
+
+        {% include 'tracker/partials/transaction-form.html' %}
+
+        <button class="btn btn-outline btn-success">
+            Guardar
+        </button>
+        
+        <button class="btn btn-outline btn-error"
+            hx-get="{% url 'transactions-list' %}"
+            hx-target="#transaction-block"
+            hx-push-url="true">
+            Cancelar
+        </button>
+
+    </form>
+</div>
+
