@@ -1,9 +1,20 @@
 body {
-    background-image: linear-gradient(to right top, #212f45, #1b3a50, #104458, #054f5e, #065a60);
+    background: linear-gradient(to top, 
+        #3a2a4a , /* Mezcla de azul y violeta */
+        #4a3a6a 10%, /* Violeta galáctico */
+        #3a2a4a 30%, /* Vuelve a mezclar azul y violeta */
+        #2a2a3a 50%, /* Azul oscuro */
+        #1a1a1a 70%, /* Oscuro */
+        #0a0a0a 90%, /* Muy oscuro */
+        #000000 /* Negro espacial */
+    );
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: Arial, sans-serif;
 }
-
 nav {
     color: white;
-    background-color: #182c34;
+    background-color: transparent;
 }
