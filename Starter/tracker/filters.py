@@ -32,6 +32,3 @@ class TransactionFilter(django_filters.FilterSet):
     class Meta:
         model = Transaction
         fields = ('transaction_type', 'start_date', 'end_date')
-
-
-    

@@ -1,4 +1,6 @@
 from pathlib import Path
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,6 +21,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "unfold",
+    "unfold.contrib.filters",
+    "unfold.contrib.import_export",
+    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -30,7 +36,7 @@ INSTALLED_APPS = [
     
     # external apps
     "django_extensions",
-    "debug_toolbar",
+    "debug_toolbar", # Debug Toolbar
     "widget_tweaks",
     'allauth',
     'allauth.account',
@@ -40,7 +46,7 @@ INSTALLED_APPS = [
     'template_partials',
     'crispy_forms',
     'crispy_tailwind',
-    
+    'import_export',    
     # project apps
     "tracker",
     
@@ -58,7 +64,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware", # Debug Toolbar
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -70,7 +76,7 @@ ROOT_URLCONF = "finance_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'finance_project' / 'templates'],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -147,7 +153,69 @@ INTERNAL_IPS = [
     # ...
 ]
 
-AUTH_USER_MODEL = 'tracker.User'
+AUTH_USER_MODEL = 'auth.User'
 LOGIN_REDIRECT_URL = 'index'
-
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 PAGE_SIZE = 5
+UNFOLD = {
+    "SITE_TITLE": 'Admin',
+    "SITE_HEADER": 'Administración',
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {
+                "en": "🇬🇧",
+                "fr": "🇫🇷",
+                "nl": "🇧🇪",
+            },
+        },
+    },
+    # "SIDEBAR": {
+    #         "show_search": False,  # Search in applications and models names
+    #         "show_all_applications": False,  # Dropdown with all applications and models
+    #         "navigation": [
+    #             {
+    #                 "title": _("Navegación"),
+    #                 "separator": True,  # Top border
+    #                 "collapsible": True,  # Collapsible group of links
+    #                 "items": [
+    #                     {
+    #                         "title": _("Dashboard"),
+    #                         "icon": "dashboard",  # Supported icon set: https://fonts.google.com/icons
+    #                         "link": reverse_lazy("admin:index"),
+    #                         "badge": "sample_app.badge_callback",
+    #                         "permission": lambda request: request.user.is_superuser,
+    #                     },
+    #                     {
+    #                         "title": _("Users"),
+    #                         "icon": "people",
+    #                         "link": reverse_lazy("admin:users_user_changelist"),
+    #                     },
+    #                 ],
+    #             },
+    #         ],
+    #     },
+    # "TABS": [
+    #     {
+    #         "models": [
+    #             "app_label.model_name_in_lowercase",
+    #         ],
+    #         "items": [
+    #             {
+    #                 "title": "Your custom title",
+                    
+    #             },
+    #         ],
+    #     },
+    # ],
+    
+}
+LANGUAGES = (
+    ('en', 'English'),
+    ('de', 'German'),
+    ('es', 'Spanish'),
+)
+MODELTRANSLATION_LANGUAGES = ('es', 'en', 'de')
+MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'es'
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('es', 'en')
+def badge_callback(request):
+    return 3

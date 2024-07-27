@@ -1,5 +1,5 @@
 from django import forms
-from tracker.models import Transaction, Category
+from tracker.models import Transaction, Category, Product, Order
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Submit, Field, Field
 

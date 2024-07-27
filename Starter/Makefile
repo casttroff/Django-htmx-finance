@@ -82,6 +82,12 @@ resetmigrations:
 resetmigrations-in-windows:
 	powershell.exe -ExecutionPolicy Bypass -File resetmigrations.ps1
 
+rebuild-data-w:
+#	python manage.py delete_users
+	python manage.py delete_transactions
+	python manage.py delete_categories
+	python manage.py generate_transactions
+
 reset-database:
 	python manage.py delete_transactions
 	python manage.py delete_categories
